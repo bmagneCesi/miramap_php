@@ -65,7 +65,7 @@ var miramapAppControllers = angular.module('miramapAppControllers', []);
             
             $http({
                 method : 'post',
-                url : "http://localhost:8888/CESI/miramap_php/bower_components/php/inscription.php",
+                url : "http://localhost/miramap_php/bower_components/php/inscription.php",
                 data : data,
                 dataType : 'application/json',
                 headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},
@@ -101,7 +101,7 @@ var miramapAppControllers = angular.module('miramapAppControllers', []);
             console.log(data);
             $http({
                 method : 'post',
-                url : "http://localhost:8888/CESI/miramap_php/bower_components/php/connexion.php",
+                url : "http://localhost/miramap_php/bower_components/php/connexion.php",
                 data : data,
                 dataType : 'application/json',
                 headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},
