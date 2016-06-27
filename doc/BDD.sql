@@ -279,8 +279,7 @@ CREATE TABLE IF NOT EXISTS `Type_utilisateur` (
   `id_type_utilisateur` int(11) NOT NULL,
   `libelle` varchar(35) NOT NULL,
   PRIMARY KEY (`id_type_utilisateur`),
-  UNIQUE KEY `libelle` (`libelle`),
-  UNIQUE KEY `id_type_utilisateurconsommateur` (`id_type_utilisateur`)
+  UNIQUE KEY `libelle` (`libelle`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -313,7 +312,7 @@ CREATE TABLE IF NOT EXISTS `Utilisateur` (
   PRIMARY KEY (`id_utilisateur`),
   UNIQUE KEY `mail` (`mail`),
   KEY `id_adresse` (`id_adresse`),
-  KEY `id_type_utilisateur` (`id_type_utilisateur`),
+  KEY `id_type_utilisateur` (`id_type_utilisateur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -359,7 +358,7 @@ ALTER TABLE `contenir__PanierProduit_`
 -- Contraintes pour la table `Contrat`
 --
 ALTER TABLE `Contrat`
-  ADD CONSTRAINT `FK_Contrat_id_consommateur` FOREIGN KEY (`id_consommateur`) REFERENCES `Utilisateur` (`id_utilisateur`);
+  ADD CONSTRAINT `FK_Contrat_id_producteur` FOREIGN KEY (`id_producteur`) REFERENCES `Utilisateur` (`id_utilisateur`);
 
 --
 -- Contraintes pour la table `Contrat_pro`
