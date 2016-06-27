@@ -4,7 +4,7 @@ $pdo = connectPDOMysql ();
 
 try {
 	
-	$paniers = $pdo->query ( "SELECT id_panier, libelle, prix FROM Panier" );
+	$paniers = $pdo->query ( "SELECT id_panier, libelle, prix FROM Panier WHERE archive = 1" );
 	
 	while ( list ( $id_panier, $libelle, $prix ) = $paniers->fetch ( PDO::FETCH_NUM ) ) {
 		

@@ -16,13 +16,13 @@ if (isset ( $libelle ) && isset ( $prix_unitaire ) && isset ( $quantite ) && iss
 				FROM Produit 
 				WHERE libelle = '" . $libelle . "' 
 					AND prix_unitaire = " . $prix_unitaire . " 
-					AND id_consomateur = (SELECT id_utilisateur 
+					AND id_consommateur = (SELECT id_utilisateur 
 						FROM Utilisateur 
 						WHERE mail = '" . $producteur . "')" );
 		$query->execute ();
 		$produitExist = $query->fetch ();
 		if ($produitExist ['exist'] == 0) {
-			$query = $pdo->prepare ( "INSERT INTO Produit(libelle,prix_unitaire,quantite,id_consomateur)
+			$query = $pdo->prepare ( "INSERT INTO Produit(libelle,prix_unitaire,quantite,id_consommateur)
 				VALUES ('" . $libelle . "', " . $prix_unitaire . ", " . $quantite . ",(SELECT id_utilisateur FROM Utilisateur WHERE mail = '" . $producteur . "')" );
 			$query->execute ();
 		} else {
@@ -30,7 +30,7 @@ if (isset ( $libelle ) && isset ( $prix_unitaire ) && isset ( $quantite ) && iss
 					SET quantite = quantite + " . $quantite . "
 					WHERE libelle = '" . $libelle . "' 
 						AND prix_unitaire = " . $prix_unitaire . " 
-						AND id_consomateur = (SELECT id_utilisateur 
+						AND id_consommateur = (SELECT id_utilisateur 
 							FROM Utilisateur 
 							WHERE mail = '" . $producteur . "')" );
 			$query->execute ();
@@ -39,7 +39,7 @@ if (isset ( $libelle ) && isset ( $prix_unitaire ) && isset ( $quantite ) && iss
 				FROM Produit
 				WHERE libelle = '" . $libelle . "' 
 					AND prix_unitaire = " . $prix_unitaire . " 
-					AND id_consomateur = (SELECT id_utilisateur FROM Utilisateur WHERE mail = '" . $producteur . "')");
+					AND id_consommateur = (SELECT id_utilisateur FROM Utilisateur WHERE mail = '" . $producteur . "')");
 		
 		$query->execute ();
 		echo json_encode ( $query-> fetch(PDO::FETCH_ASSOC) );
