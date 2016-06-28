@@ -2,7 +2,7 @@
 function connectPDOMysql()
 {
 
-	$dsn = 'mysql:dbname=miramap;host=localhost';
+	$dsn = 'mysql:dbname=miramap_test;host=localhost';
 	$user = 'root';
 	$password = 'ggagni42';
 
