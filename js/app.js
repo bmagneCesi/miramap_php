@@ -50,40 +50,29 @@ var miramapAppControllers = angular.module('miramapAppControllers', []);
 
     miramapApp.controller('inscriptionCtrl', function($scope, $http) {
 
-        $scope.regions = [{"region" : "Île-de-France"},
-                          {"region" : "Berry"},
-                          {"region" : "Orléanais"},
-                          {"region" : "Normandie"},
-                          {"region" : "Languedoc"},
-                          {"region" : "Lyonnais"},
-                          {"region" : "Dauphiné"},
-                          {"region" : "Champagne"},
-                          {"region" : "Aunis"},
-                          {"region" : "Saintonge"},
-                          {"region" : "Poitou"},
-                          {"region" : "Guyenne et Gascogne"},
-                          {"region" : "Bourgogne"},
-                          {"region" : "Picardie"},
-                          {"region" : "Anjou"},
-                          {"region" : "Provence"},
-                          {"region" : "Angoumois"},
-                          {"region" : "Bourbonnais"},
-                          {"region" : "Marche"},
-                          {"region" : "Bretagne"},
-                          {"region" : "Maine"},
-                          {"region" : "Touraine"},
-                          {"region" : "Limousin"},
-                          {"region" : "Comté de Foix"},
-                          {"region" : "Auvergne"},
-                          {"region" : "Béarn"},
-                          {"region" : "Alsace"},
-                          {"region" : "Artois"},
-                          {"region" : "Roussillon"},
-                          {"region" : "Flandre française et Hainaut français"},
-                          {"region" : "Franche-Comté"},
-                          {"region" : "Lorraine"},
-                          {"region" : "Corse"},
-                          {"region" : "Nivernais"}];
+        $scope.regions =   [{"region" : "Alsace"},
+                            {"region" : "Aquitaine"},
+                            {"region" : "Auvergne"},
+                            {"region" : "Basse Normandie"},
+                            {"region" : "Bourgogne"},
+                            {"region" : "Bretagne"},
+                            {"region" : "Centre"},
+                            {"region" : "Champagne Ardenne"},
+                            {"region" : "Corse"},
+                            {"region" : "Franche Comte"},
+                            {"region" : "Haute Normandie"},
+                            {"region" : "Ile de France"},
+                            {"region" : "Languedoc Roussillon"},
+                            {"region" : "Limousin"},
+                            {"region" : "Lorraine"},
+                            {"region" : "Midi-Pyrénées"},
+                            {"region" : "Nord Pas de Calais"},
+                            {"region" : "Provence Alpes Côte d'Azur"},
+                            {"region" : "Pays de la Loire"},
+                            {"region" : "Picardie"},
+                            {"region" : "Poitou Charente"},
+                            {"region" : "Rhone Alpes"}
+                            ];
 
         // Perform the login action when the user submits the login form
         $scope.inscriptionAction = function() {
@@ -169,6 +158,28 @@ var miramapAppControllers = angular.module('miramapAppControllers', []);
 // Contrôleur de la page d'accueil
 miramapApp.controller('homeCtrl', function($scope) {
     $scope.pageId = 'home';
+});
+
+// Contrôleur de la page des producteurs
+miramapApp.controller('listeProducteursCtrl', function($scope, $http) {
+    $scope.pageId = 'liste-producteurs';
+
+    $http({
+                method : 'get',
+                url : "http://localhost:8888/CESI/miramap_php/bower_components/php/producteurs.php",
+                dataType : 'application/json',
+                headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},
+            }).success(function (data) {
+
+                console.log(data);
+                $scope.producteurs = data;
+
+            }).error(function (data) {
+            
+                console.log(data);
+                alert('L\'application n\'a pas pu mettre à jour le contenu : ' + data);
+
+            });
 });
 
 // Contrôleur de la page de localisation des points de vente
