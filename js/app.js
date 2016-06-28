@@ -50,6 +50,41 @@ var miramapAppControllers = angular.module('miramapAppControllers', []);
 
     miramapApp.controller('inscriptionCtrl', function($scope, $http) {
 
+        $scope.regions = [{"region" : "Île-de-France"},
+                          {"region" : "Berry"},
+                          {"region" : "Orléanais"},
+                          {"region" : "Normandie"},
+                          {"region" : "Languedoc"},
+                          {"region" : "Lyonnais"},
+                          {"region" : "Dauphiné"},
+                          {"region" : "Champagne"},
+                          {"region" : "Aunis"},
+                          {"region" : "Saintonge"},
+                          {"region" : "Poitou"},
+                          {"region" : "Guyenne et Gascogne"},
+                          {"region" : "Bourgogne"},
+                          {"region" : "Picardie"},
+                          {"region" : "Anjou"},
+                          {"region" : "Provence"},
+                          {"region" : "Angoumois"},
+                          {"region" : "Bourbonnais"},
+                          {"region" : "Marche"},
+                          {"region" : "Bretagne"},
+                          {"region" : "Maine"},
+                          {"region" : "Touraine"},
+                          {"region" : "Limousin"},
+                          {"region" : "Comté de Foix"},
+                          {"region" : "Auvergne"},
+                          {"region" : "Béarn"},
+                          {"region" : "Alsace"},
+                          {"region" : "Artois"},
+                          {"region" : "Roussillon"},
+                          {"region" : "Flandre française et Hainaut français"},
+                          {"region" : "Franche-Comté"},
+                          {"region" : "Lorraine"},
+                          {"region" : "Corse"},
+                          {"region" : "Nivernais"}];
+
         // Perform the login action when the user submits the login form
         $scope.inscriptionAction = function() {
 
@@ -57,15 +92,22 @@ var miramapAppControllers = angular.module('miramapAppControllers', []);
             {
                 "email" : $scope.emailInscription,
                 "password" : $scope.passwordInscription,
-                "lastname" : $scope.lastnameInscription,
-                "firstname" : $scope.firstnameInscription,
-                "city" : $scope.cityInscription,
-                "phone" : $scope.phoneInscription  
+                "nom" : $scope.nomInscription,
+                "prenom" : $scope.prenomInscription,
+                "adresse" : $scope.adresseInscription,
+                "ville" : $scope.villeInscription,
+                "telephone" : $scope.telephoneInscription,
+                "type_utilisateur" : $scope.typeUtilisateurInscription,
+                "civilite" : $scope.civiliteInscription,
+                "nationalite" : $scope.nationaliteeInscription,
+                "code_postal" : $scope.codePostalInscription,
+                "region" : $scope.regionInscription,
+                "date_naissance" : $scope.dateNaissanceInscription,
             };
-            
+            console.log(data);
             $http({
                 method : 'post',
-                url : "http://localhost/miramap_php/bower_components/php/inscription.php",
+                url : "http://localhost:8888/CESI/miramap_php/bower_components/php/inscription.php",
                 data : data,
                 dataType : 'application/json',
                 headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},
