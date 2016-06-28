@@ -71,32 +71,74 @@
     <form methd="post">
       <h2 class="text-center">S'INSCRIRE</h2>
       <br><br>
-      <fieldset class="form-group">
-        <label for="formGroupExampleInput">Email</label>
-        <input type="text" class="form-control" ng-model="emailInscription" id="contact-email" placeholder="Votre email">
-      </fieldset>
-      <fieldset class="form-group">
-        <label for="formGroupExampleInput">Prénom</label>
-        <input type="text" class="form-control" ng-model="firstnameInscription" id="inscription-firstname" placeholder="Votre prénom">
-      </fieldset>
-      <fieldset class="form-group">
-        <label for="formGroupExampleInput">Nom</label>
-        <input type="text" class="form-control" ng-model="lastnameInscription" id="inscription-lastname" placeholder="Votre nom">
-      </fieldset>
-      <fieldset class="form-group">
-        <label for="formGroupExampleInput">Ville</label>
-        <input type="text" class="form-control" ng-model="cityInscription" id="inscription-city" placeholder="Votre ville">
-      </fieldset>
-      <fieldset class="form-group">
-        <label for="formGroupExampleInput">Téléphone</label>
-        <input type="text" class="form-control" ng-model="phoneInscription" id="inscription-phone" placeholder="Votre téléphone">
-      </fieldset>
-      <fieldset class="form-group">
-        <label for="formGroupExampleInput">Mot de passe</label>
-        <input type="password" class="form-control" ng-model="passwordInscription" id="inscription-password" placeholder="Votre mot de passe">
-      </fieldset>
-
-      <button type="submit" ng-click="inscriptionAction()" class="btn-miramap">Envoyer</button>
+      <div class="col-lg-6 col-xs-12">
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Civilité</label>
+              <select class="form-control" ng-model="civiliteInscription" id="inscription-email" placeholder="Votre civilité">
+                <option value="homme">Mr</option>
+                <option value="femme">Mme</option>
+              </select>
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Profil</label>
+              <select class="form-control" ng-model="typeUtilisateurInscription" id="inscription-type-utilisateur" placeholder="Votre profil">
+                <option value="producteur">Producteur</option>
+                <option value="consommateur">Consommateur</option>
+              </select>
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Email</label>
+              <input type="text" class="form-control" ng-model="emailInscription" id="inscription-email" placeholder="Votre email">
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Prénom</label>
+              <input type="text" class="form-control" ng-model="prenomInscription" id="inscription-prenom" placeholder="Votre prénom">
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Nom</label>
+              <input type="text" class="form-control" ng-model="nomInscription" id="inscription-nom" placeholder="Votre nom">
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Adresse</label>
+              <input type="text" class="form-control" ng-model="adresseInscription" id="inscription-adresse" placeholder="Votre adresse">
+            </fieldset>
+        <fieldset class="form-group">
+          <label for="formGroupExampleInput">Mot de passe</label>
+          <input type="password" class="form-control" ng-model="passwordInscription" id="inscription-password" placeholder="Votre mot de passe">
+        </fieldset>
+      </div>
+      <div class="col-lg-6 col-xs-12">
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Code postal</label>
+              <input type="text" class="form-control" ng-model="codePostalInscription" id="inscription-code-postal" placeholder="Votre code postal">
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Ville</label>
+              <input type="text" class="form-control" ng-model="villeInscription" id="inscription-ville" placeholder="Votre ville">
+            </fieldset>
+          <fieldset class="form-group">
+          <label for="formGroupExampleInput">Région</label>
+          <select class="form-control" ng-model="regionInscription" id="inscription-region" placeholder="Votre région">
+            <option ng-repeat="r in regions" value="{{r.region}}">{{r.region}}</option>
+          </select>
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="formGroupExampleInput">Nationalité</label>
+          <input type="text" class="form-control" ng-model="nationaliteInscription" id="inscription-nationalite" placeholder="Votre nationalité">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="formGroupExampleInput">Téléphone</label>
+          <input type="text" class="form-control" ng-model="phoneInscription" id="inscription-phone" placeholder="Votre téléphone">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="formGroupExampleInput">Date de naissance</label>
+          <input type="date" class="form-control" ng-model="dateNaissanceInscription" id="inscription-date-naissance" placeholder="Votre date de naissance">
+        </fieldset>
+      </div>
+      <div class="col-lg-12 text-center">
+        <button type="submit" ng-click="inscriptionAction()" class="btn-miramap">Envoyer</button>
+      </div>
+      
      </form>
   </div>
 
@@ -104,6 +146,7 @@
 <!-- FORMULAIRE DE CONNEXION -->
   <div id="login" ng-controller="loginCtrl">
     <form methd="post">
+      <div class="col-lg-12">
       <h2 class="text-center">SE CONNECTER</h2>
       <br><br>
       <fieldset class="form-group">
@@ -112,10 +155,12 @@
       </fieldset>
       <fieldset class="form-group">
         <label for="formGroupExampleInput">Mot de passe</label>
-        <input type="password" class="form-control" ng-model="passwordLogin" id="login-firstname" placeholder="Votre mot de passe">
+        <input type="password" class="form-control" ng-model="passwordLogin" id="login-prenom" placeholder="Votre mot de passe">
       </fieldset>
-
+    </div>
+    <div class="col-lg-12 text-center">
       <button type="submit" ng-click="loginAction()" class="btn-miramap">Envoyer</button>
+    </div>
      </form>
   </div>
 <!-- FIN FORMULAIRE DE CONNEXION -->
