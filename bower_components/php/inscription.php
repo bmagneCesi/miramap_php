@@ -19,7 +19,7 @@ $ville = $request->ville;
 $region = $request->region;
 $type_utilisateur = $request->type_utilisateur;
 
-if (isset ( $email ) && isset ( $prenom ) && isset ( $nom ) && isset ( $password ) && isset ( $adresse ) && isset ( $date_naissance ) && isset ( $civilite ) && isset ( $telephone )&& isset ( $nationalite )  && isset ( $code_postal ) && isset ( $ville ) && isset ( $region ) && isset ( $type_utilisateur )) {
+if (isset ( $email ) && isset ( $prenom ) && isset ( $nom ) && isset ( $password ) && isset ( $adresse ) && isset ( $date_naissance ) && isset ( $civilite ) && isset ( $telephone ) && isset ( $nationalite ) && isset ( $code_postal ) && isset ( $ville ) && isset ( $region ) && isset ( $type_utilisateur )) {
 	
 	try {
 		$query = $pdo->prepare ( "SELECT COUNT(*) AS exist 
