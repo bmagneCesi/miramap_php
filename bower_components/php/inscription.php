@@ -19,7 +19,7 @@ $ville = $request->ville;
 $region = $request->region;
 $type_utilisateur = $request->type_utilisateur;
 
-if (isset ( $email ) && isset ( $prenom ) && isset ( $nom ) && isset ( $password ) && isset ( $adresse ) && isset ( $date_naissance ) && isset ( $civilite ) && isset ( $telephone ) && isset ( $nationalite ) && isset ( $code_postal ) && isset ( $ville ) && isset ( $region ) && isset ( $type_utilisateur )) {
+if (isset ( $email ) && isset ( $prenom ) && isset ( $nom ) && isset ( $password ) && isset ( $adresse ) && isset ( $date_naissance ) && isset ( $civilite ) && isset ( $telephone )&& isset ( $nationalite )  && isset ( $code_postal ) && isset ( $ville ) && isset ( $region ) && isset ( $type_utilisateur )) {
 	
 	try {
 		$query = $pdo->prepare ( "SELECT COUNT(*) AS exist 
@@ -36,7 +36,7 @@ if (isset ( $email ) && isset ( $prenom ) && isset ( $nom ) && isset ( $password
 			$regionExist = $query->fetch ();
 			if ($regionExist ['exist'] == 0) {
 				$query = $pdo->prepare ( "INSERT INTO Region (libelle)
-					VALUES ('" . $region . "'" );
+					VALUES ('" . $region . "')" );
 				$query->execute ();
 			}
 			
@@ -52,7 +52,7 @@ if (isset ( $email ) && isset ( $prenom ) && isset ( $nom ) && isset ( $password
 			$villeExist = $query->fetch ();
 			if ($villeExist ['exist'] == 0) {
 				$query = $pdo->prepare ( "INSERT INTO Ville (libelle,code_postal,id_region)
-					VALUES ('" . $ville . "','" . $code_postal . "', (SELECT id_region FROM Region WHERE libelle = '" . $region . "' LIMIT 1)" );
+					VALUES ('" . $ville . "','" . $code_postal . "', (SELECT id_region FROM Region WHERE libelle = '" . $region . "' LIMIT 1))" );
 				$query->execute ();
 			}
 			
@@ -68,7 +68,7 @@ if (isset ( $email ) && isset ( $prenom ) && isset ( $nom ) && isset ( $password
 			$adresseExist = $query->fetch ();
 			if ($adresseExist ['exist'] == 0) {
 				$query = $pdo->prepare ( "INSERT INTO Adresse (adresse,id_ville) 
-					VALUES ('" . $adresse . "',(SELECT id_ville FROM Ville WHERE libelle = '" . $ville . "' AND code_postal = '" . $code_postal . "' LIMIT 1)" );
+					VALUES ('" . $adresse . "',(SELECT id_ville FROM Ville WHERE libelle = '" . $ville . "' AND code_postal = '" . $code_postal . "' LIMIT 1))" );
 				$query->execute ();
 			}
 			
@@ -77,7 +77,7 @@ if (isset ( $email ) && isset ( $prenom ) && isset ( $nom ) && isset ( $password
 					VALUES ('" . $email . "','" . $password . "','" . $nom . "','" . $prenom . "'," . $date_naissance . ",'" . $civilite . "','" . $telephone . "','" . $nationalite . "',
 						(SELECT a.id_adresse 
 							FROM Adresse AS a, Ville AS v, Region AS r
-							WHERE r.libelle = '" . $region . "' AND r.id_region = v.id_region AND v.libelle = '" . $ville . "' AND v.code_postal = '" . $code_postal . "' AND v.id_ville = a.id_ville AND a.adresse = '" . $adresse . "')
+							WHERE r.libelle = '" . $region . "' AND r.id_region = v.id_region AND v.libelle = '" . $ville . "' AND v.code_postal = '" . $code_postal . "' AND v.id_ville = a.id_ville AND a.adresse = '" . $adresse . "'),
 						(SELECT id_type_utilisateur 
 							FROM Type_utilisateur 
 							WHERE libelle = '" . $type_utilisateur . "'))" );
