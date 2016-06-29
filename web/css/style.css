@@ -11,6 +11,8 @@ body{background: #e6e9f2;height:100%;}
     src: url(../font/opensans.ttf);
 }
 
+.prim-color{color:#57AB4C;}
+
 /**********************************************    MENU    **********************************************************/
 #nav-container{background-color: #262c3b;height: 130px;width: 100%;display: table;z-index: 3;top: 0;position: fixed;}
 #nav-container a#logo{margin: 0 auto;text-align: center;position: absolute;left: 0;right: 0;top: 10px;width: 100px;}

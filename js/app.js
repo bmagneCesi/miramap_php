@@ -88,23 +88,37 @@ var miramapAppControllers = angular.module('miramapAppControllers', []);
                 "telephone" : $scope.telephoneInscription,
                 "type_utilisateur" : $scope.typeUtilisateurInscription,
                 "civilite" : $scope.civiliteInscription,
-                "nationalite" : $scope.nationaliteeInscription,
+                "nationalite" : $scope.nationaliteInscription,
                 "code_postal" : $scope.codePostalInscription,
                 "region" : $scope.regionInscription,
-                "date_naissance" : $scope.dateNaissanceInscription,
+                "date_naissance" : $('#inscription-date-naissance').val()
             };
-            console.log(data);
+
             $http({
                 method : 'post',
                 url : "http://localhost:8888/CESI/miramap_php/bower_components/php/inscription.php",
                 data : data,
                 dataType : 'application/json',
                 headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},
-            }).success(function (data) {
 
+            }).success(function (data) {
+                $('#inscription').children('form').slideUp();
+                $('#inscription').prepend('<div class="loading-container"><div style="height:30px;width:400px;background:#E7E7E7;border-radius:5px;margin:0 auto"><div class="loading" style="height:100%;width:0px;background-color:#57AB4C;border-radius:5px"></div></div><br/><p class="text-center prim-color">En cours</p></div>');
+                $('.loading').animate({width: "100%"}, 1700);
+
+                setTimeout(function () {
+                    $('.loading-container').html('<div class="text-center" style="width:100%"><i class="fa fa-check-circle text-center" style="color:#57AB4C;font-size:40px;margin:0 auto" aria-hidden="true"></i><h2 class="prim-color">Bien inscrit !</h2><p class="prim-color">Vous pouvez maintenant vous connecter.</p></div>');
+                }, 1700);
+
+                setTimeout(function () {
+                    $.fancybox.close();
+                }, 3000);
+                $('.loading-container').remove();
+                $('#inscription form').show();
+                
                 window.location.href = '#/';
-                alert('Bien inscrit ! Vous pouvez vous connecter.');
-                console.log(data);
+                
+
             }).error(function (data) {
             
                 console.log(data);
@@ -157,39 +171,46 @@ var miramapAppControllers = angular.module('miramapAppControllers', []);
 
 // Contrôleur de la page d'accueil
 miramapApp.controller('homeCtrl', function($scope) {
+
     $scope.pageId = 'home';
+
 });
 
 // Contrôleur de la page des producteurs
 miramapApp.controller('listeProducteursCtrl', function($scope, $http) {
+    
     $scope.pageId = 'liste-producteurs';
-
     $http({
-                method : 'get',
-                url : "http://localhost:8888/CESI/miramap_php/bower_components/php/producteurs.php",
-                dataType : 'application/json',
-                headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},
-            }).success(function (data) {
+        method : 'get',
+        url : "http://localhost:8888/CESI/miramap_php/bower_components/php/producteurs.php",
+        dataType : 'application/json',
+        headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},
+    }).success(function (data) {
 
-                console.log(data);
-                $scope.producteurs = data;
+        console.log(data);
+        $scope.producteurs = data;
 
-            }).error(function (data) {
-            
-                console.log(data);
-                alert('L\'application n\'a pas pu mettre à jour le contenu : ' + data);
+    }).error(function (data) {
+    
+        console.log(data);
+        alert('L\'application n\'a pas pu mettre à jour le contenu : ' + data);
 
-            });
+    });
+
 });
 
 // Contrôleur de la page de localisation des points de vente
 miramapApp.controller('locationCtrl', function($scope) {
+
     $scope.pageId = 'localisation-amap';
+
 });
 
 // Contrôleur de la page de contact
 miramapApp.controller('contactCtrl', function($scope) {
+
     $scope.pageId = 'contact';
+
 });
 
 ////////////////////////////////    FIN ROUTING    /////////////////////////////////////////////

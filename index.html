@@ -122,13 +122,15 @@
             <option ng-repeat="r in regions" value="{{r.region}}">{{r.region}}</option>
           </select>
         </fieldset>
-        <fieldset class="form-group">
-          <label for="formGroupExampleInput">Nationalité</label>
-          <input type="text" class="form-control" ng-model="nationaliteInscription" id="inscription-nationalite" placeholder="Votre nationalité">
-        </fieldset>
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Nationalité</label>
+              <select class="form-control" ng-model="nationaliteInscription" id="inscription-nationalite" placeholder="Votre nationalité">
+                <option value="FR">France</option>
+              </select>
+            </fieldset>
         <fieldset class="form-group">
           <label for="formGroupExampleInput">Téléphone</label>
-          <input type="text" class="form-control" ng-model="phoneInscription" id="inscription-phone" placeholder="Votre téléphone">
+          <input type="text" class="form-control" ng-model="telephoneInscription" id="inscription-telephone" placeholder="Votre téléphone">
         </fieldset>
         <fieldset class="form-group">
           <label for="formGroupExampleInput">Date de naissance</label>
