@@ -45,7 +45,9 @@
         <span data-show-when-connected>
           <li><a href="#/liste-paniers">Commander</a></li>
           <span>|</span>
-          <li><a href="#/liste-producteurs">Producteurs</a></li>
+          <li><a href="#/producteurs">Producteurs</a></li>
+          <span>|</span>
+          <li><a href="#/creation-panier">Création panier</a></li>
           <span>|</span>
         </span>
     		<li><a href="#/localisation-amap">Nos point de revente</a></li>
@@ -67,7 +69,7 @@
 
 <!-- DEBUT FORMULAIRE d'INSCRIPTION -->
 
-  <div id="inscription" ng-controller="inscriptionCtrl">
+  <div id="inscription" ng-controller="inscriptionCtrl" style="display:none">
     <form methd="post">
       <h2 class="text-center">S'INSCRIRE</h2>
       <br><br>
@@ -102,10 +104,6 @@
               <label for="formGroupExampleInput">Adresse</label>
               <input type="text" class="form-control" ng-model="adresseInscription" id="inscription-adresse" placeholder="Votre adresse">
             </fieldset>
-        <fieldset class="form-group">
-          <label for="formGroupExampleInput">Mot de passe</label>
-          <input type="password" class="form-control" ng-model="passwordInscription" id="inscription-password" placeholder="Votre mot de passe">
-        </fieldset>
       </div>
       <div class="col-lg-6 col-xs-12">
             <fieldset class="form-group">
@@ -137,6 +135,13 @@
           <input type="date" class="form-control" ng-model="dateNaissanceInscription" id="inscription-date-naissance" placeholder="Votre date de naissance">
         </fieldset>
       </div>
+      
+      <div class="col-lg-offset-3 col-lg-6">
+        <fieldset class="form-group">
+          <label for="formGroupExampleInput">Mot de passe</label>
+          <input type="password" class="form-control" ng-model="passwordInscription" id="inscription-password" placeholder="Votre mot de passe">
+        </fieldset>
+      </div>
       <div class="col-lg-12 text-center">
         <button type="submit" ng-click="inscriptionAction()" class="btn-miramap">Envoyer</button>
       </div>
@@ -146,11 +151,12 @@
 
 <!-- FIN FORMULAIRE d'INSCRIPTION -->
 <!-- FORMULAIRE DE CONNEXION -->
-  <div id="login" ng-controller="loginCtrl">
+  <div id="login" ng-controller="loginCtrl" style="display:none">
     <form methd="post">
       <div class="col-lg-12">
       <h2 class="text-center">SE CONNECTER</h2>
-      <br><br>
+      <br>
+      <div class="col-lg-6 col-lg-offset-3 "> 
       <fieldset class="form-group">
         <label for="formGroupExampleInput">Email</label>
         <input type="text" class="form-control" ng-model="emailLogin" id="login-email" placeholder="Votre email">
@@ -159,8 +165,9 @@
         <label for="formGroupExampleInput">Mot de passe</label>
         <input type="password" class="form-control" ng-model="passwordLogin" id="login-prenom" placeholder="Votre mot de passe">
       </fieldset>
+      </div>
     </div>
-    <div class="col-lg-12 text-center">
+    <div class="col-lg-12 text-center" style="margin-top:20px">
       <button type="submit" ng-click="loginAction()" class="btn-miramap">Envoyer</button>
     </div>
      </form>

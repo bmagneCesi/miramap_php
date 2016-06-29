@@ -11,7 +11,9 @@ body{background: #e6e9f2;height:100%;}
     src: url(../font/opensans.ttf);
 }
 
+/***********************************************************  GLOBAL  **************************************************************/
 .prim-color{color:#57AB4C;}
+.entete-bck{width:100%;background:#57AB4C;padding: 10px;color:#fff;border-top-left-radius: 4px;border-top-right-radius: 4px;margin-bottom: 20px}
 
 /**********************************************    MENU    **********************************************************/
 #nav-container{background-color: #262c3b;height: 130px;width: 100%;display: table;z-index: 3;top: 0;position: fixed;}
@@ -31,7 +33,7 @@ body{background: #e6e9f2;height:100%;}
 #nav-container #login-container li{display: inline-block;margin: 0px 5px}
 #nav-container #login-container li button{color:#fff;}
 .btn-miramap{background: #57AB4C;padding: 7px 15px;border-radius: 3px;border-bottom: 2px solid #419B4A;border-top: none;border-left: none;border-right: none;color:#fff;}
-#inscription{width:600px;padding: 40px}
+#inscription{width:600px;padding: 20px;overflow: hidden;}
 #inscription h2, #login h2{font-size: 40px;font-weight: 300}
 #login{width:600px;padding: 40px}
 
@@ -43,3 +45,16 @@ body{background: #e6e9f2;height:100%;}
 
 /*********************************************   LOCATION   ***************************************************************/
 #location #gmap-container{height: 100%;}
+
+/************************************************ LISTE PRODUCTEURS ********************************************************/
+#liste-producteurs .infos-container{background-color:#F9F9F9;border-radius:4px;border-bottom: 2px solid #E1E1E1;}
+#liste-producteurs a{text-decoration: none;color: inherit;display: block;}
+#liste-producteurs a:hover{opacity: 0.8}
+
+
+/************************************************ CREATION PANIER & PRODUITS **********************************************************************/
+#creation-panier {padding-top: 20px}
+#creation-panier .container-app{background-color:#F9F9F9;border-radius:4px;border-bottom: 2px solid #E1E1E1;}
+#creation-panier .container-app form{padding: 50px}
+#creation-panier .delete-button:hover{cursor: pointer;opacity: 0.8}
+#creation-panier .liste-produits-panier{display:none;height: 110px;background: #fff;overflow: scroll;padding: 10px;border-radius: 7px;border: 1px solid #ccc;}
