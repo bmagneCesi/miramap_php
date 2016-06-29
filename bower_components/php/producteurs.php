@@ -4,15 +4,20 @@ $pdo = connectPDOMysql ();
 
 try {
 	
-	$query = $pdo->prepare ( "SELECT u.nom AS nom, u.prenom AS prenom, u.mail AS mail, u.telephone AS telephone, u.nationalite AS nationalite, a.adresse AS adresse, v.libelle AS ville, v.code_postal AS code_postal, r.libelle AS region 
-			FROM Utilisateur AS u, Ville AS v, Region AS r, Type_utilisateur AS t
-			WHERE a.id_ville = v.id_ville 
-				AND v.id_region = r.id_region 
-				AND u.id_type_utilisateur = t.id_type_utilisateur
-				AND t.libelle = 'producteur'" );
+	$query = $pdo->prepare ( "SELECT u.nom, u.prenom, u.date_naissance, u.mail, u.civilite, u.telephone, a.adresse, v.libelle ville, v.code_postal code_postal, r.libelle region
+FROM Utilisateur u
+LEFT JOIN Adresse a
+ON u.id_adresse = a.id_adresse
+LEFT JOIN Ville v
+ON a.id_ville = v.id_ville
+LEFT JOIN Region r
+ON v.id_region = r.id_region
+LEFT JOIN Type_utilisateur tu
+ON u.id_type_utilisateur = tu.id_type_utilisateur
+WHERE tu.id_type_utilisateur = 1" );
 	
 	$query->execute ();
-	echo json_encode ( $query->fetchAll () );
+	echo json_encode ( $query->fetch ( PDO::FETCH_ASSOC ) );
 } catch ( PDOException $e ) {
 	print "Erreur !: " . $e->getMessage () . "<br/>";
 	die ();
