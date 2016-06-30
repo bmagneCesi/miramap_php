@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('loginService', function($http){
+app.factory('loginService', function($http,$rootScope,$localStorage){
 	return{
 		login:function(user){
 			var $promise=$http.post('bower_components/php/connexion.php', user);
@@ -15,7 +15,25 @@ app.factory('loginService', function($http){
 		            }, 1700);
 
 		            setTimeout(function () {
-		               window.location.href = '#/';
+						
+						$localStorage.session = 
+                    	{
+			           		"logged": true,
+			           		"nom": data.data.nom,
+			           		"prenom": data.data.prenom,
+			           		"email": data.data.email,
+			           		"telephone": data.data.telephone,
+			           		"nationalite": data.data.nationalite,
+			           		"adresse": data.data.adresse,
+			           		"ville": data.data.ville,
+			           		"code_postal": data.data.code_postal,
+			           		"region": data.data.region,
+			           		"role": data.data.role,
+			           		"id": data.data.id
+						};
+
+		            	window.location.reload();
+		               
 		            }, 4000);
 
 				}else{ // login fail

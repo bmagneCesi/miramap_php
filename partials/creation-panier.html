@@ -22,7 +22,7 @@
 			          <label for="formGroupExampleInput">Quantité</label>
 			          <input type="text" class="form-control" ng-model="quantiteProduit" id="produit-quantite" placeholder="La nombre de produits">
 			        </fieldset>
-			        <input type="hidden" value="1" ng-model="producteurProduit" id="produit-producteur">
+			        <input type="hidden" value="{{session.id}}" ng-model="producteurProduit" id="produit-producteur">
 			        <div class="col-lg-12 text-center" style="margin-top:20px">
 				    	<button type="submit" ng-click="ajoutProduitAction()" class="btn-miramap">Ajouter le produit</button>
 				    </div>

@@ -27,14 +27,20 @@
   <script src="js/controllers/loginCtrl.js"></script>  
   <script src="js/controllers/locationCtrl.js"></script>  
   <script src="js/controllers/producteurPaniersCtrl.js"></script>  
+  <script src="js/controllers/navCtrl.js"></script>  
 <!-- CONTROLLERS -->
 <!-- DIRECTIVES -->
   <script src="js/directives/connexionDirective.js"></script>  
   <script src="js/directives/inscriptionDirective.js"></script>  
+  <script src="js/directives/sessionDirective.js"></script>  
 <!-- DIRECTIVES -->
 <!-- SERVICES -->
   <script src="js/services/loginService.js"></script>  
 <!-- SERVICES -->
+
+<!-- COMPONENTS -->
+  <script src="bower_components/ngstorage/ngStorage.js"></script>  
+<!-- COMPONENTS -->
 
   <script src="js/ng-map.min.js"></script>  
 
@@ -49,34 +55,32 @@
 	<body>
     <!-- overlay quand menu expanded -->
     <div class="darken"></div> 
-
+  
     <!-- menu -->
-    <div id="nav-container">
-
+    <div id="nav-container" ng-controller="navCtrl">
       <i id="nav-expand" class="fa fa-bars not-expanded"></i>
       <a id="logo" href="#/"><img src="web/img/logo.png" alt=""></a>     
-
+  
     	<ul id="nav">
         <li><a href="#/a-propos">Accueil</a></li>
         <span>|</span>
 
-        <span data-show-when-connected>
-          <li><a href="#/liste-paniers">Commander</a></li>
+        <span>
+          <li ng-if="session.logged"><a href="#/liste-paniers">Commander</a></li>
           <span>|</span>
           <li><a href="#/producteurs">Producteurs</a></li>
           <span>|</span>
-          <li><a href="#/creation-panier">Création panier</a></li>
+          <li ng-show="session.role=='Producteur' "><a href="#/creation-panier">Création panier</a></li>
           <span>|</span>
         </span>
     		<li><a href="#/localisation-amap">Nos point de revente</a></li>
         <span>|</span>
         <li><a href="#/contact">Contact</a></li>
     	</ul>
-
-      <ul id="login-container" data-hide-when-connected>
-        <li><a href="#/inscription" id="btn-inscription" class="btn-miramap">Inscription</a></li>
-        <li><a href="#/connexion" id="btn-connexion" class="btn-miramap">Connexion</a></li>
-        <li><button id="btn-logout" ng-click="logout()" class="btn-miramap">Deconnexion</button></li>
+      <ul id="login-container">
+        <li ng-if="!session.logged"><a href="#/inscription" id="btn-inscription" class="btn-miramap">Inscription</a></li>
+        <li ng-if="!session.logged"><a href="#/connexion" id="btn-connexion" class="btn-miramap">Connexion</a></li>
+        <li ng-if="session.logged"><button id="btn-connexion" ng-click="logout()" class="btn-miramap">Deconnexion</button></li>
       </ul>
 
     </div>

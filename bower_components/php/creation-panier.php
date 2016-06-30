@@ -20,7 +20,7 @@ if (isset ( $libelle ) && isset ( $prix_total ) && isset ( $producteur ) && isse
 		$panierExist = $query->fetch ();
 		if ($panierExist ['exist'] == 0) {
 			$query = $pdo->prepare ( "INSERT INTO Panier(libelle,prix,id_producteur) 
-					VALUES('" . $libelle . "', ".$prix_total.")" );
+					VALUES('" . $libelle . "', " . $prix_total . ", " . $producteur . " )" );
 			$query->execute ();
 
 			foreach ($produits as $key => $value) {

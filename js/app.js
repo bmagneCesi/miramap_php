@@ -1,12 +1,13 @@
 'use strict';
 
 var app = angular.module('app', [
-'ngRoute'
+'ngRoute',
+'ngStorage'
 ]); 
 
 
-app.run(function($rootScope) {
-    $rootScope.base_url = "http://localhost:8888/CESI/miramap_php/#";
+app.run(function($rootScope,$localStorage) {
+    $rootScope.session = $localStorage.session;
 })
 ////////////////////////////////    DEBUT ROUTING    /////////////////////////////////////////////
 

@@ -1,9 +1,11 @@
 'use trict';
 
-app.controller('inscriptionCtrl', function($scope, $http) {
+app.controller('inscriptionCtrl', function($scope, $http,$localStorage) {
 
     $scope.pageId = 'inscription-page';
-    
+    if ($localStorage.session.logged) {
+        window.location.href = '#/';
+    };
     $scope.regions =   [{"region" : "Alsace"},
                         {"region" : "Aquitaine"},
                         {"region" : "Auvergne"},

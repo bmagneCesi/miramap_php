@@ -1,9 +1,9 @@
-app.controller('creationPanierCtrl', function($scope, $http, $filter) {
+app.controller('creationPanierCtrl', function($scope, $http, $filter,$localStorage) {
 
     $scope.pageId = 'creation-panier';
 
         var data = {
-            "producteur" : 1
+            "producteur" : $localStorage.session.id
         }
 
         $http({
@@ -31,9 +31,32 @@ app.controller('creationPanierCtrl', function($scope, $http, $filter) {
             if ($('.liste-produits-panier').is(':hidden')) {
                 $('.liste-produits-panier').slideDown();
             };
+
+
+        if ($scope.produitsListed.length != 0) {
+            var exist = 0;
+            angular.forEach($scope.produitsListed, function(value, key){
+                if (value.libelle == $scope.nomProduitPanier.replace(/(.*) - ([0-9]+)€/, '$1')) {
+                    value.quantite += $scope.quantiteProduitPanier;
+                    value.prix += $scope.quantiteProduitPanier * $scope.nomProduitPanier.replace(/(.*) - ([0-9]+)€/, '$2');
+                    $scope.total += $scope.quantiteProduitPanier * $scope.nomProduitPanier.replace(/(.*) - ([0-9]+)€/, '$2');
+                }else{
+                    exist++;
+                }
+            });
+
+            if (exist == $scope.produitsListed.length) {
+                $scope.produitsListed.push({"libelle": $scope.nomProduitPanier.replace(/(.*) - ([0-9]+)€/, '$1'), "quantite": $scope.quantiteProduitPanier, "prix": $scope.quantiteProduitPanier * $scope.nomProduitPanier.replace(/(.*) - ([0-9]+)€/, '$2')});
+                $scope.total += $scope.quantiteProduitPanier * $scope.nomProduitPanier.replace(/(.*) - ([0-9]+)€/, '$2');
+            };
+
+        }else{
             $scope.produitsListed.push({"libelle": $scope.nomProduitPanier.replace(/(.*) - ([0-9]+)€/, '$1'), "quantite": $scope.quantiteProduitPanier, "prix": $scope.quantiteProduitPanier * $scope.nomProduitPanier.replace(/(.*) - ([0-9]+)€/, '$2')});
             $scope.total += $scope.quantiteProduitPanier * $scope.nomProduitPanier.replace(/(.*) - ([0-9]+)€/, '$2');
-            console.log($scope.produitsListed);
+        }
+          
+            
+
 
             $('#submitPanier').prop('disabled', false);
         };
@@ -56,7 +79,6 @@ app.controller('creationPanierCtrl', function($scope, $http, $filter) {
 
         if (typeof $scope.nomPanier != undefined) {
 
-
             var data = {
                 "libelle" : $scope.nomPanier,
                 "prix_total" : $scope.total,
@@ -64,6 +86,7 @@ app.controller('creationPanierCtrl', function($scope, $http, $filter) {
                 "producteur" : $('#produit-producteur').val()
             }
 
+            console.log(data);
             
             $http({
                 method : 'post',
@@ -73,6 +96,10 @@ app.controller('creationPanierCtrl', function($scope, $http, $filter) {
                 headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},
 
             }).success(function (data) {
+
+                $scope.produitsListed = [];
+                $scope.total = 0;
+                
                 $('#form-panier-container').children('form').slideUp();
                 $('#form-panier-container').prepend('<div class="loading-container"><div style="height:30px;width:400px;background:#E7E7E7;border-radius:5px;margin:0 auto"><div class="loading" style="height:100%;width:0px;background-color:#57AB4C;border-radius:5px"></div></div><br/><p class="text-center prim-color">En cours de création</p></div>');
                 $('.loading').animate({width: "100%"}, 1700);
