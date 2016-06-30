@@ -56,17 +56,6 @@ $(document).ready(function() {
 	
 	///////////////////////////  FIN HOME  ////////////////////////////////////
 
-	///////////////////////////  LOGIN & INSCRIPTION  ////////////////////////////////////
-
-	$('#btn-login').click(function(event) {
-		$.fancybox('#login');
-	});
-
-	$('#btn-inscription').click(function(event) {
-		$.fancybox('#inscription');
-	});
-
-	///////////////////////////  FIN LOGIN & INSCRIPTION  ////////////////////////////////////
 
 
 });
