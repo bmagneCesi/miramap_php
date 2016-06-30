@@ -2,7 +2,7 @@
 
   <div id="inscription" ng-controller="inscriptionCtrl" class="container-app col-md-6 col-md-offset-3" style="padding: 0!important;">
     
-    <form methd="post">
+    <form methd="post" name="inscription">
       <h2 class="text-center entete-bck" style="margin:0">INSCRIPTION</h2>
       <div class="col-md-4 col-md-offset-2 col-xs-12" style="margin-top:20px">
             <fieldset class="form-group">
@@ -74,7 +74,7 @@
         </fieldset>
       </div>
       <div class="col-md-12 text-center validation-container" style="margin-bottom:20px">
-        <button type="submit" ng-click="inscriptionAction()" class="btn-miramap">Envoyer</button>
+        <button type="submit" ng-disabled="inscription.$invalid" ng-click="inscriptionAction()" class="btn-miramap">Envoyer</button>
       </div>
       
      </form>
