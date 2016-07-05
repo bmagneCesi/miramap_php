@@ -1,0 +1,83 @@
+<!-- DEBUT FORMULAIRE d'INSCRIPTION -->
+
+  <div id="inscription" ng-controller="inscriptionCtrl" class="container-app col-md-6 col-md-offset-3" style="padding: 0!important;">
+    
+    <form methd="post" name="inscription">
+      <h2 class="text-center entete-bck" style="margin:0">INSCRIPTION</h2>
+      <div class="col-md-4 col-md-offset-2 col-xs-12" style="margin-top:20px">
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Civilité</label>
+              <select class="form-control" ng-model="civiliteInscription" id="inscription-email" placeholder="Votre civilité">
+                <option value="Mr">Mr</option>
+                <option value="Mme">Mme</option>
+              </select>
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Profil</label>
+              <select class="form-control" ng-model="typeUtilisateurInscription" id="inscription-type-utilisateur" placeholder="Votre profil">
+                <option value="Producteur">Producteur</option>
+                <option value="Consommateur">Consommateur</option>
+              </select>
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Email</label>
+              <input type="text" class="form-control" ng-model="emailInscription" id="inscription-email" placeholder="Votre email">
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Prénom</label>
+              <input type="text" class="form-control" ng-model="prenomInscription" id="inscription-prenom" placeholder="Votre prénom">
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Nom</label>
+              <input type="text" class="form-control" ng-model="nomInscription" id="inscription-nom" placeholder="Votre nom">
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">A-dresse</label>
+              <input type="text" class="form-control" ng-model="adresseInscription" id="inscription-adresse" placeholder="Votre adresse">
+            </fieldset>
+      </div>
+      <div class="col-md-4 col-xs-12"  style="margin-top:20px">
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Code postal</label>
+              <input type="text" class="form-control" ng-model="codePostalInscription" id="inscription-code-postal" placeholder="Votre code postal">
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Ville</label>
+              <input type="text" class="form-control" ng-model="villeInscription" id="inscription-ville" placeholder="Votre ville">
+            </fieldset>
+          <fieldset class="form-group">
+          <label for="formGroupExampleInput">Région</label>
+          <select class="form-control" ng-model="regionInscription" id="inscription-region" placeholder="Votre région">
+            <option ng-repeat="r in regions" value="{{r.region}}">{{r.region}}</option>
+          </select>
+        </fieldset>
+            <fieldset class="form-group">
+              <label for="formGroupExampleInput">Nationalité</label>
+              <select class="form-control" ng-model="nationaliteInscription" id="inscription-nationalite" placeholder="Votre nationalité">
+                <option value="FR">France</option>
+              </select>
+            </fieldset>
+        <fieldset class="form-group">
+          <label for="formGroupExampleInput">Téléphone</label>
+          <input type="text" class="form-control" ng-model="telephoneInscription" id="inscription-telephone" placeholder="Votre téléphone">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="formGroupExampleInput">Date de naissance</label>
+          <input type="date" class="form-control" ng-model="dateNaissanceInscription" id="inscription-date-naissance" placeholder="Votre date de naissance">
+        </fieldset>
+      </div>
+      
+      <div class="col-md-offset-3 col-md-6"  style="margin-top:10px">
+        <fieldset class="form-group">
+          <label for="formGroupExampleInput">Mot de passe</label>
+          <input type="password" class="form-control" ng-model="passwordInscription" id="inscription-password" placeholder="Votre mot de passe">
+        </fieldset>
+      </div>
+      <div class="col-md-12 text-center validation-container" style="margin-bottom:20px">
+        <button type="submit" ng-disabled="inscription.$invalid" ng-click="inscriptionAction()" class="btn-miramap">Envoyer</button>
+      </div>
+      
+     </form>
+  </div>
+
+<!-- FIN FORMULAIRE d'INSCRIPTION -->

@@ -1,5 +1,5 @@
-html{background-color: #e6e9f2;height: 100%;overflow: hidden}
-body{background: #e6e9f2;height:100%;}
+html{background-color: #e6e9f2;height: 100%;overflow: auto}
+body{background: #e6e9f2!important;height:100%;}
 
 @font-face {
     font-family: 'daysun';
@@ -10,8 +10,17 @@ body{background: #e6e9f2;height:100%;}
     font-family: 'open sans';
     src: url(../font/opensans.ttf);
 }
-
+a{text-decoration: none;}
+a:hover{text-decoration: none!important;}
+ul li{list-style-type: none;}
+ul{padding: 0}
+#btn-profil{height: 36px;
+    display: block;
+    width: 80px;
+    text-align: center;}
+/***********************************************************  GLOBAL  **************************************************************/
 .prim-color{color:#57AB4C;}
+.entete-bck{width:100%;background:#57AB4C;padding: 10px;color:#fff;border-top-left-radius: 4px;border-top-right-radius: 4px;margin-bottom: 20px}
 
 /**********************************************    MENU    **********************************************************/
 #nav-container{background-color: #262c3b;height: 130px;width: 100%;display: table;z-index: 3;top: 0;position: fixed;}
@@ -31,9 +40,8 @@ body{background: #e6e9f2;height:100%;}
 #nav-container #login-container li{display: inline-block;margin: 0px 5px}
 #nav-container #login-container li button{color:#fff;}
 .btn-miramap{background: #57AB4C;padding: 7px 15px;border-radius: 3px;border-bottom: 2px solid #419B4A;border-top: none;border-left: none;border-right: none;color:#fff;}
-#inscription{width:600px;padding: 40px}
-#inscription h2, #login h2{font-size: 40px;font-weight: 300}
-#login{width:600px;padding: 40px}
+#inscription-page #inscription h2, #connexion-page #login h2{font-size: 40px;font-weight: 300}
+#connexion-page #connexion, #inscription-page #inscription{margin-top: 40px}
 
 /**********************************************    CONTACT    **********************************************************/
 #contact #contact-container{margin-top: 100px;padding: 50px;background: #FFF;border-radius: 5px;border-bottom: 2px solid #D1D1D1;}
@@ -42,4 +50,34 @@ body{background: #e6e9f2;height:100%;}
 
 
 /*********************************************   LOCATION   ***************************************************************/
-#location #gmap-container{height: 100%;}
+#localisation-amap #gmap-container{height: 100%;}
+
+/************************************************ LISTE PRODUCTEURS ********************************************************/
+#liste-producteurs .infos-container{background-color:#F9F9F9;border-radius:4px;border-bottom: 2px solid #E1E1E1;}
+#liste-producteurs a{text-decoration: none;color: inherit;display: block;}
+#liste-producteurs a:hover{opacity: 0.8}
+
+
+/************************************************ CREATION PANIER & PRODUITS **********************************************************************/
+#creation-panier {padding-top: 20px}
+.container-app{background-color:#F9F9F9;border-radius:4px;border-bottom: 2px solid #E1E1E1;}
+#creation-panier .container-app form{padding: 50px}
+#creation-panier .delete-button:hover{cursor: pointer;opacity: 0.8}
+#creation-panier .liste-produits-panier{display:none;height: 110px;background: #fff;overflow: scroll;padding: 10px;border-radius: 7px;border: 1px solid #ccc;}
+
+/********************************************************* LISTE PANIERS *****************************************************************/
+#producteur-paniers .btn-miramap, #liste-paniers .btn-miramap{ position: absolute;
+    bottom: 25px;    left: 0;    right: 0;    margin: 0 auto;    width: 120px;}
+#producteur-paniers .parent-container,#liste-paniers .parent-container{height:300px;}
+#producteur-paniers .entete-bck, #liste-paniers .entete-bck{margin:0px;}
+#producteur-paniers .list-group, #liste-paniers .list-group{max-height: 124px;overflow-y:auto;}
+#producteur-paniers .produits-container,#achat-paniers .produits-container, #liste-paniers .produits-container{width:100%;}
+#producteur-paniers .infos-container, #liste-paniers .infos-container{padding-bottom:20px;height: 165px	}
+#producteur-paniers .produits-libelle,#achat-paniers .produits-libelle, #liste-paniers .produits-libelle{width:90%;}
+#producteur-paniers .produits-li-container,#achat-paniers .produits-li-container, #liste-paniers .produits-li-container{border-radius: 0px;border-left: none;
+    border-right: none;}
+#achat-paniers form{height: auto;overflow: hidden;}
+#achat-paniers form .date-achat{width: 50%!important;margin:0!important;float: left}
+
+.infos-text{margin-top: 40px}
+.infos-profil-text{background: #fff;padding:10px;border-radius: 4px}

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr" ng-app="miramapApp">
+<html lang="fr" ng-app="app">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
@@ -18,6 +18,33 @@
   <script src="js/vendor/angular-route.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="js/app.js"></script>  
+<!-- CONTROLLERS -->
+  <script src="js/controllers/homeCtrl.js"></script>  
+  <script src="js/controllers/achatPanierCtrl.js"></script>  
+  <script src="js/controllers/contactCtrl.js"></script>  
+  <script src="js/controllers/creationPanierCtrl.js"></script>  
+  <script src="js/controllers/listeProducteursCtrl.js"></script>  
+  <script src="js/controllers/inscriptionCtrl.js"></script>  
+  <script src="js/controllers/loginCtrl.js"></script>  
+  <script src="js/controllers/locationCtrl.js"></script>  
+  <script src="js/controllers/profilCtrl.js"></script>  
+  <script src="js/controllers/producteurPaniersCtrl.js"></script>  
+  <script src="js/controllers/navCtrl.js"></script>  
+  <script src="js/controllers/listePaniersCtrl.js"></script>  
+<!-- CONTROLLERS -->
+<!-- DIRECTIVES -->
+  <script src="js/directives/connexionDirective.js"></script>  
+  <script src="js/directives/inscriptionDirective.js"></script>  
+  <script src="js/directives/sessionDirective.js"></script>  
+<!-- DIRECTIVES -->
+<!-- SERVICES -->
+  <script src="js/services/loginService.js"></script>  
+<!-- SERVICES -->
+
+<!-- COMPONENTS -->
+  <script src="bower_components/ngstorage/ngStorage.js"></script>  
+<!-- COMPONENTS -->
+
   <script src="js/ng-map.min.js"></script>  
 
   <script src="bootstrap/js/bootstrap.js"></script>
@@ -31,31 +58,37 @@
 	<body>
     <!-- overlay quand menu expanded -->
     <div class="darken"></div> 
-
+  
     <!-- menu -->
-    <div id="nav-container">
-
+    <div id="nav-container" ng-controller="navCtrl">
       <i id="nav-expand" class="fa fa-bars not-expanded"></i>
-      <a id="logo" href="#/"><img src="web/img/logo.png" alt=""></a>     
-
+      <a class="hidden-xs" id="logo" href="#/"><img src="web/img/logo.png" alt=""></a>     
+  
     	<ul id="nav">
         <li><a href="#/a-propos">Accueil</a></li>
         <span>|</span>
 
-        <span data-show-when-connected>
+        <span  ng-show="session.role == 'Consommateur'">
+          <span  ng-if="session.logged">
           <li><a href="#/liste-paniers">Commander</a></li>
           <span>|</span>
-          <li><a href="#/liste-producteurs">Producteurs</a></li>
+        </span>
+      </span>
+           
+          <li><a href="#/producteurs">Producteurs</a></li>
+          <span ng-show="session.role=='Producteur' "><span>|</span>
+          <li ><a href="#/creation-panier">Création panier</a></li></span>
           <span>|</span>
         </span>
     		<li><a href="#/localisation-amap">Nos point de revente</a></li>
         <span>|</span>
         <li><a href="#/contact">Contact</a></li>
     	</ul>
-
-      <ul id="login-container" data-hide-when-connected>
-        <li><button id="btn-inscription" class="btn-miramap">Inscription</button></li>
-        <li><button id="btn-login" class="btn-miramap">Connexion</button></li>
+      <ul id="login-container">
+        <li ng-if="!session.logged"><a href="#/inscription" id="btn-inscription" class="btn-miramap">Inscription</a></li>
+        <li ng-if="!session.logged"><a href="#/connexion" id="btn-connexion" class="btn-miramap">Connexion</a></li>
+        <li ng-if="session.logged"><a href="#/profil" id="btn-profil" class="btn-miramap">Profil</a></li>
+        <li ng-if="session.logged"><button id="btn-connexion" ng-click="logout()" class="btn-miramap">Deconnexion</button></li>
       </ul>
 
     </div>
@@ -64,108 +97,6 @@
     <div id="center_column">
       <div id="{{ pageId }}" class="page" ng-view></div>	
     </div>
-
-<!-- DEBUT FORMULAIRE d'INSCRIPTION -->
-
-  <div id="inscription" ng-controller="inscriptionCtrl">
-    <form methd="post">
-      <h2 class="text-center">S'INSCRIRE</h2>
-      <br><br>
-      <div class="col-lg-6 col-xs-12">
-            <fieldset class="form-group">
-              <label for="formGroupExampleInput">Civilité</label>
-              <select class="form-control" ng-model="civiliteInscription" id="inscription-email" placeholder="Votre civilité">
-                <option value="Mr">Mr</option>
-                <option value="Mme">Mme</option>
-              </select>
-            </fieldset>
-            <fieldset class="form-group">
-              <label for="formGroupExampleInput">Profil</label>
-              <select class="form-control" ng-model="typeUtilisateurInscription" id="inscription-type-utilisateur" placeholder="Votre profil">
-                <option value="Producteur">Producteur</option>
-                <option value="Consommateur">Consommateur</option>
-              </select>
-            </fieldset>
-            <fieldset class="form-group">
-              <label for="formGroupExampleInput">Email</label>
-              <input type="text" class="form-control" ng-model="emailInscription" id="inscription-email" placeholder="Votre email">
-            </fieldset>
-            <fieldset class="form-group">
-              <label for="formGroupExampleInput">Prénom</label>
-              <input type="text" class="form-control" ng-model="prenomInscription" id="inscription-prenom" placeholder="Votre prénom">
-            </fieldset>
-            <fieldset class="form-group">
-              <label for="formGroupExampleInput">Nom</label>
-              <input type="text" class="form-control" ng-model="nomInscription" id="inscription-nom" placeholder="Votre nom">
-            </fieldset>
-            <fieldset class="form-group">
-              <label for="formGroupExampleInput">Adresse</label>
-              <input type="text" class="form-control" ng-model="adresseInscription" id="inscription-adresse" placeholder="Votre adresse">
-            </fieldset>
-        <fieldset class="form-group">
-          <label for="formGroupExampleInput">Mot de passe</label>
-          <input type="password" class="form-control" ng-model="passwordInscription" id="inscription-password" placeholder="Votre mot de passe">
-        </fieldset>
-      </div>
-      <div class="col-lg-6 col-xs-12">
-            <fieldset class="form-group">
-              <label for="formGroupExampleInput">Code postal</label>
-              <input type="text" class="form-control" ng-model="codePostalInscription" id="inscription-code-postal" placeholder="Votre code postal">
-            </fieldset>
-            <fieldset class="form-group">
-              <label for="formGroupExampleInput">Ville</label>
-              <input type="text" class="form-control" ng-model="villeInscription" id="inscription-ville" placeholder="Votre ville">
-            </fieldset>
-          <fieldset class="form-group">
-          <label for="formGroupExampleInput">Région</label>
-          <select class="form-control" ng-model="regionInscription" id="inscription-region" placeholder="Votre région">
-            <option ng-repeat="r in regions" value="{{r.region}}">{{r.region}}</option>
-          </select>
-        </fieldset>
-            <fieldset class="form-group">
-              <label for="formGroupExampleInput">Nationalité</label>
-              <select class="form-control" ng-model="nationaliteInscription" id="inscription-nationalite" placeholder="Votre nationalité">
-                <option value="FR">France</option>
-              </select>
-            </fieldset>
-        <fieldset class="form-group">
-          <label for="formGroupExampleInput">Téléphone</label>
-          <input type="text" class="form-control" ng-model="telephoneInscription" id="inscription-telephone" placeholder="Votre téléphone">
-        </fieldset>
-        <fieldset class="form-group">
-          <label for="formGroupExampleInput">Date de naissance</label>
-          <input type="date" class="form-control" ng-model="dateNaissanceInscription" id="inscription-date-naissance" placeholder="Votre date de naissance">
-        </fieldset>
-      </div>
-      <div class="col-lg-12 text-center">
-        <button type="submit" ng-click="inscriptionAction()" class="btn-miramap">Envoyer</button>
-      </div>
-      
-     </form>
-  </div>
-
-<!-- FIN FORMULAIRE d'INSCRIPTION -->
-<!-- FORMULAIRE DE CONNEXION -->
-  <div id="login" ng-controller="loginCtrl">
-    <form methd="post">
-      <div class="col-lg-12">
-      <h2 class="text-center">SE CONNECTER</h2>
-      <br><br>
-      <fieldset class="form-group">
-        <label for="formGroupExampleInput">Email</label>
-        <input type="text" class="form-control" ng-model="emailLogin" id="login-email" placeholder="Votre email">
-      </fieldset>
-      <fieldset class="form-group">
-        <label for="formGroupExampleInput">Mot de passe</label>
-        <input type="password" class="form-control" ng-model="passwordLogin" id="login-prenom" placeholder="Votre mot de passe">
-      </fieldset>
-    </div>
-    <div class="col-lg-12 text-center">
-      <button type="submit" ng-click="loginAction()" class="btn-miramap">Envoyer</button>
-    </div>
-     </form>
-  </div>
-<!-- FIN FORMULAIRE DE CONNEXION -->
 
 	</body>
 </html>

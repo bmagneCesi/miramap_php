@@ -1,0 +1,83 @@
+<div ng-controller="creationPanierCtrl"> 
+
+	<div class="col-lg-6 col-xs-12"  style="padding:40px">
+		<div class="container-app">
+			<div class="entete-bck">
+				<h4 class="text-center">Ajouter un produit</h4>
+			</div>
+			<div id="form-produit-container">
+				<form class="row">
+					<fieldset class="form-group col-lg-6 col-lg-offset-3">
+			          <label for="formGroupExampleInput">Nom du produit</label>
+			          <input type="text" class="form-control" ng-model="nomProduit" id="produit-nom" placeholder="Le nom du produit">
+			        </fieldset>
+					<fieldset class="form-group col-lg-6 col-lg-offset-3">
+			          <label for="formGroupExampleInput">Prix unitaire</label>
+						<div class="input-group">
+							<div class="input-group-addon">€</div>
+					      	<input type="text" class="form-control" ng-model="prixProduit" id="produit-prix" placeholder="Le prix du produit">
+						</div>
+			        </fieldset>
+					<fieldset class="form-group col-lg-6 col-lg-offset-3">
+			          <label for="formGroupExampleInput">Quantité</label>
+			          <input type="text" class="form-control" ng-model="quantiteProduit" id="produit-quantite" placeholder="La nombre de produits">
+			        </fieldset>
+			        <input type="hidden" value="{{session.id}}" ng-model="producteurProduit" id="produit-producteur">
+			        <div class="col-lg-12 text-center" style="margin-top:20px">
+				    	<button type="submit" ng-click="ajoutProduitAction()" class="btn-miramap">Ajouter le produit</button>
+				    </div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-6 col-xs-12" style="padding:40px">
+		<div class="container-app">
+			<div class="entete-bck">
+				<h4 class="text-center">Créer un panier</h4>
+			</div>
+			<div id="form-panier-container">
+				<form class="row">
+					<div class="row">
+						<fieldset class="form-group col-lg-6">
+				          <label for="formGroupExampleInput">Nom du panier</label>
+				          <input type="text" class="form-control" ng-model="nomPanier" id="panier-nom" placeholder="Le nom du panier" required />
+				        </fieldset>
+					</div>
+					<div class="row">
+						<fieldset class="form-group col-lg-6">
+				          <label for="formGroupExampleInput">Produit</label>
+				          	<select class="form-control" ng-model="nomProduitPanier">
+				          		<option ng-repeat="p in produitsPanier">{{p.libelle}} - {{p.prix_unitaire}}€</option>
+							</select>
+				        </fieldset>
+						<fieldset class="form-group col-lg-3">
+				          <label for="formGroupExampleInput">Quantité</label>
+				          <input type="number" class="form-control" ng-model="quantiteProduitPanier" id="produit-quantite" placeholder="Quantité">
+				        </fieldset>
+						<fieldset class="form-group col-lg-3">
+				            <label for="formGroupExampleInput">Ajouter</label><br>
+				          	<button type="button" ng-click="ajoutLigneAction(item)" class="btn-miramap"><i class="fa fa-plus" aria-hidden="true" style="color:#fff"></i></button>
+				        </fieldset>
+				    </div>
+			        <ul class="unstyled liste-produits-panier">
+			          <li style="list-style-type:none" ng-repeat="plist in produitsListed">
+			            <div class="view">
+			              <p><i ng-click="supprimerProduitPanier($index)" class="fa fa-times delete-button" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<span>{{plist.libelle}}</span>, quantité : {{plist.quantite}}, prix : {{ plist.prix }}€</p>
+			            </div>
+			          </li>
+			        </ul>
+			        <div class="row">
+			        	<fieldset class="form-group col-lg-3">
+			        		<p>Total : {{ total }} €</p>
+			        	</fieldset>
+			        </div>
+			       	<div class="row text-center" style="margin-top:20px">
+				    	<button id="submitPanier" type="submit" ng-click="creerPanier()" class="btn-miramap">Créer le panier</button>
+				    </div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</div>
