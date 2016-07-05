@@ -10,6 +10,7 @@ app.controller('navCtrl', function($scope,$localStorage) {
 		}
 
 		window.location.reload();
+		window.location.href = "#/";
 
 	};
 

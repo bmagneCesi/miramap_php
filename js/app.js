@@ -7,8 +7,16 @@ var app = angular.module('app', [
 
 
 app.run(function($rootScope,$localStorage) {
+    $rootScope.baseUrl = 'http://localhost:8888/CESI/miramap_php/#'
     $rootScope.session = $localStorage.session;
-})
+});
+
+app.filter('capitalize', function() {
+    return function(input) {
+      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    }
+});
+
 ////////////////////////////////    DEBUT ROUTING    /////////////////////////////////////////////
 
 app.config(['$routeProvider',
@@ -55,6 +63,14 @@ app.config(['$routeProvider',
         .when('/inscription', {
             templateUrl: 'partials/inscription.html',
             controller: 'inscriptionCtrl'
+        })
+        .when('/profil', {
+            templateUrl: 'partials/profil.html',
+            controller: 'profilCtrl'
+        })
+        .when('/liste-paniers/achat/:idPanier', {
+            templateUrl: 'partials/achat.html',
+            controller: 'achatPanierCtrl'
         })
         .otherwise({
             redirectTo: '/'

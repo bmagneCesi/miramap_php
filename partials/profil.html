@@ -1,0 +1,111 @@
+<div ng-controller="profilCtrl">
+	
+	<div class="parent-container col-xs-12 col-sm-6" style="padding:40px">
+
+        <div class="text-center infos-container container-app">
+            <p class="entete-bck">Mon profil</p>
+	
+        	<form class="row" id="profil-form" name="profil">
+        		<div class="col-xs-12 col-sm-6" style="padding:30px">
+					<fieldset class="form-group">
+			          <label for="formGroupExampleInput">Email</label>
+			          <input required type="text" class="form-control input-modif" ng-show="visibilityInput" ng-model="mail" placeholder="{{profil.utilisateur.mail}}">
+			          <p class="infos-profil-text" ng-show="visibilityText">{{profil.utilisateur.mail}}</p>
+			        </fieldset>
+					<fieldset class="form-group">
+			          <label for="formGroupExampleInput">Nom</label>
+			          <input required type="text" class="form-control input-modif" ng-show="visibilityInput" ng-model="nom" placeholder="{{profil.utilisateur.nom}}">
+			          <p class="infos-profil-text" ng-show="visibilityText">{{profil.utilisateur.nom}}</p>
+			        </fieldset>
+					<fieldset class="form-group">
+			          <label for="formGroupExampleInput">Prenom</label>
+			          <input required type="text" class="form-control input-modif" ng-show="visibilityInput" ng-model="prenom" placeholder="{{profil.utilisateur.prenom}}">
+			          <p class="infos-profil-text" ng-show="visibilityText">{{profil.utilisateur.prenom}}</p>
+			        </fieldset>
+					<fieldset class="form-group">
+			          <label for="formGroupExampleInput">Télephone</label>
+			          <input required type="text" class="form-control input-modif" ng-show="visibilityInput" ng-model="telephone" placeholder="{{profil.utilisateur.telephone}}">
+			          <p class="infos-profil-text" ng-show="visibilityText">{{profil.utilisateur.telephone}}</p>
+			        </fieldset>
+        		</div>
+				
+       		<div class="col-xs-12 col-sm-6" style="padding:30px">
+				<fieldset class="form-group">
+		          <label for="formGroupExampleInput">Date de naissance</label>
+		          <input required type="date" class="form-control input-modif" ng-show="visibilityInput" ng-model="date_naissance" value="{{profil.utilisateur.date_naissance}}">
+		          <p class="infos-profil-text" id="date_naissance" ng-show="visibilityText">{{profil.utilisateur.date_naissance}}</p>
+		        </fieldset>
+				<fieldset class="form-group">
+		          <label for="formGroupExampleInput">Adresse</label>
+		          <input required type="text" class="form-control input-modif" ng-show="visibilityInput" ng-model="adresse" placeholder="{{profil.utilisateur.adresse}}">
+		          <p class="infos-profil-text" ng-show="visibilityText">{{profil.utilisateur.adresse}}</p>
+		        </fieldset>
+				<fieldset class="form-group">
+		          <label for="formGroupExampleInput">Ville</label>
+		          <input required type="text" class="form-control input-modif" ng-show="visibilityInput" ng-model="ville" placeholder="{{profil.utilisateur.ville}}">
+		          <p class="infos-profil-text" ng-show="visibilityText">{{profil.utilisateur.ville}}</p>
+		        </fieldset>
+		    </div>
+		        <div class="col-lg-12 text-center" style="margin-bottom:20px">
+		        	<button type="button" ng-show="visibilityText" ng-click="modifierProfilAction()" class="btn-miramap">Modifier</button>
+			    	<button type="submit" ng-show="visibilityInput" ng-click="updateProfilAction()" class="btn-miramap"  ng-disabled="profil.$invalid">Mettre à jour</button>
+			    </div>
+			</form>
+            
+        </div>
+
+</div>
+<div ng-show="session.role=='Consommateur' " class="parent-container col-xs-12 col-sm-6 " style="padding:40px">
+	
+		 <div class="text-center infos-container container-app">
+            <p class="entete-bck">Paniers commandés</p>
+	            <table class="produits-container table table-striped">
+	            	<thead>
+	            		<th class="text-center">Panier</th>
+	            		<th class="text-center">État</th>
+	            		<th class="text-center">Date de livraison</th>
+	            		<th class="text-center">Livraison</th>
+	            		<th class="text-center">Prix</th>
+	            	</thead>
+	            	<tbody>
+	                <tr ng-repeat="c in profil.contrats">
+	                    <td class="produits-libelle">{{c.libelle}}</td>
+	                    <td class="produits-libelle"><p class="label label-warning">{{c.etat}}</p></td>
+	                    <td class="produits-libelle"><span ng-show="c.date_livraison != '0000-00-00'">{{c.date_livraison}}</span></td>
+	                    <td class="produits-libelle">{{c.livraison}}</td>
+	                    <td class="produits-libelle">{{c.prix}}€</td>
+	                </tr>
+	            </tbody>
+	            </table>
+         </div>
+
+</div>
+
+<div ng-show="session.role=='Producteur' " class="parent-container col-xs-12 col-sm-6 " style="padding:40px">
+	
+		 <div class="text-center infos-container container-app">
+            <p class="entete-bck">Paniers commandés</p>
+	            <table class="produits-container table table-striped">
+	            	<thead >
+	            		<th class="text-center">Panier</th>
+	            		<th class="text-center">État</th>
+	            		<th class="text-center">Date de livraison</th>
+	            		<th class="text-center">Livraison</th>
+	            		<th class="text-center">Prix</th>
+	            		<th class="text-center"></th>
+	            	</thead>
+	            	<tbody>
+	                <tr ng-repeat="c in profil.contrats">
+	                    <td class="produits-libelle">{{c.libelle}}</td>
+	                    <td class="produits-libelle etat"><p class="label label-warning">{{c.etat}}</p></td>
+						<td ng-if="c.date_livraison == '0000-00-00'" class="livraison_date"><input class="form-control input-date" type="date" ng-model="dateLivraisonProducteur" name="dateLivraisonProducteur"/><p ng-show="dateLivraison">{{dateLivraison}}</p></td>
+						<td ng-if="c.date_livraison != '0000-00-00'">{{c.date_livraison}}</td>
+	                    <td class="produits-libelle">{{c.livraison}}</td>
+	                    <td class="produits-libelle">{{c.prix}}€</td>
+	                    <td ng-if="c.date_livraison == '0000-00-00'" class="produits-libelle"><button ng-click="updateLivraisonAction()" class="updateLivraison btn-miramap">Valider</button></td>
+	                </tr>
+	            </tbody>
+	            </table>
+         </div>
+
+	</div>

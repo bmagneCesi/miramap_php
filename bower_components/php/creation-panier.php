@@ -5,7 +5,7 @@ $pdo = connectPDOMysql ();
 $postdata = file_get_contents ( "php://input" );
 $request = json_decode ( $postdata );
 
-$libelle = $request->libelle;
+$libelle = addslashes($request->libelle);
 $prix_total = $request->prix_total;
 $producteur = $request->producteur;
 $produits = json_decode(json_encode($request->produits),true);

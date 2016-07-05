@@ -1,14 +1,24 @@
 <div ng-controller="producteurPaniersCtrl">
 
-	<div ng-repeat="panier in paniers" class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding:40px">
-		
-			<div class="text-center infos-container">
-				<p class="entete-bck">{{panier}}</p>
-				
-					<h4>Contenu du panier :</h4>
+	<h2 class="text-center prim-color" style="padding-top:30px">Liste des paniers</h2>
 
-			</div>
+	<div ng-repeat="panier in paniers" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 parent-container" style="padding:40px">
+			
+		<div class="text-center infos-container container-app">
+			<p class="entete-bck">{{panier.libelle | uppercase}}</p>
+
+			<ul class="list-group">
+			  <li class="list-group-item produits-li-container" ng-repeat="p in panier.produits">
+			  	<table class="produits-container">
+			  		<tr>
+			  			<td class="produits-libelle">{{p.libelle}}</td>
+			  			<td><span class="label label-default label-pill pull-xs-right" >{{p.quantite}}</span></td>
+			  		</tr>
+			  	</table>
+			  </li>
+			</ul>
+			<button ng-show="session.role == 'Consommateur'" ng-click="achatPanierAction(panier)" class="btn-miramap">Acheter {{panier.prix_total}} €</button>
+		</div>
 		
 	</div>
-
 </div>

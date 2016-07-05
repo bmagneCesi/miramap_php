@@ -1,7 +1,7 @@
 <div ng-controller="listeProducteursCtrl">
 
 	<div ng-repeat="producteur in producteurs" class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding:40px">
-		<a href="{{base_url}}/producteurs/{{producteur.id_utilisateur}}">
+		<a href="{{baseUrl}}/producteurs/{{producteur.id_utilisateur}}">
 			<div class="text-center infos-container">
 				<p class="entete-bck">{{producteur.civilite}} {{ producteur.prenom }} {{ producteur.nom }}</p>
 				<p><i class="fa fa-mobile" aria-hidden="true"></i> {{ producteur.telephone }}</p>

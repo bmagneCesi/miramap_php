@@ -20,14 +20,17 @@
   <script src="js/app.js"></script>  
 <!-- CONTROLLERS -->
   <script src="js/controllers/homeCtrl.js"></script>  
+  <script src="js/controllers/achatPanierCtrl.js"></script>  
   <script src="js/controllers/contactCtrl.js"></script>  
   <script src="js/controllers/creationPanierCtrl.js"></script>  
   <script src="js/controllers/listeProducteursCtrl.js"></script>  
   <script src="js/controllers/inscriptionCtrl.js"></script>  
   <script src="js/controllers/loginCtrl.js"></script>  
   <script src="js/controllers/locationCtrl.js"></script>  
+  <script src="js/controllers/profilCtrl.js"></script>  
   <script src="js/controllers/producteurPaniersCtrl.js"></script>  
   <script src="js/controllers/navCtrl.js"></script>  
+  <script src="js/controllers/listePaniersCtrl.js"></script>  
 <!-- CONTROLLERS -->
 <!-- DIRECTIVES -->
   <script src="js/directives/connexionDirective.js"></script>  
@@ -59,18 +62,22 @@
     <!-- menu -->
     <div id="nav-container" ng-controller="navCtrl">
       <i id="nav-expand" class="fa fa-bars not-expanded"></i>
-      <a id="logo" href="#/"><img src="web/img/logo.png" alt=""></a>     
+      <a class="hidden-xs" id="logo" href="#/"><img src="web/img/logo.png" alt=""></a>     
   
     	<ul id="nav">
         <li><a href="#/a-propos">Accueil</a></li>
         <span>|</span>
 
-        <span>
-          <li ng-if="session.logged"><a href="#/liste-paniers">Commander</a></li>
+        <span  ng-show="session.role == 'Consommateur'">
+          <span  ng-if="session.logged">
+          <li><a href="#/liste-paniers">Commander</a></li>
           <span>|</span>
+        </span>
+      </span>
+           
           <li><a href="#/producteurs">Producteurs</a></li>
-          <span>|</span>
-          <li ng-show="session.role=='Producteur' "><a href="#/creation-panier">Création panier</a></li>
+          <span ng-show="session.role=='Producteur' "><span>|</span>
+          <li ><a href="#/creation-panier">Création panier</a></li></span>
           <span>|</span>
         </span>
     		<li><a href="#/localisation-amap">Nos point de revente</a></li>
@@ -80,6 +87,7 @@
       <ul id="login-container">
         <li ng-if="!session.logged"><a href="#/inscription" id="btn-inscription" class="btn-miramap">Inscription</a></li>
         <li ng-if="!session.logged"><a href="#/connexion" id="btn-connexion" class="btn-miramap">Connexion</a></li>
+        <li ng-if="session.logged"><a href="#/profil" id="btn-profil" class="btn-miramap">Profil</a></li>
         <li ng-if="session.logged"><button id="btn-connexion" ng-click="logout()" class="btn-miramap">Deconnexion</button></li>
       </ul>
 
